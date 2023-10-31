@@ -18,13 +18,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">JSP 개요</h1>
+                        <h1 class="page-title">내장객체</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
                         <li><a href="/">INDEX</a></li>
-                        <li>CH01</li>
+                        <li>CH05</li>
                     </ul>
                 </div>
             </div>
@@ -37,6 +37,22 @@
                 <div class="col-lg-12 col-md-12 col-12">
                     <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
                    		<!-- 내용 -->
+                   		<%
+                   			// 폼 페이지에서 입력한 한글을 처리하도록 request 내장 객체의 setCharacterEncoding 메소드에
+                   			// 문자 인코딩 휴형을 utf-8으로 작성
+                   			request.setCharacterEncoding("UTF-8");
+                   			// 입력된 아이디와 비밀번호를 폼 태그로부터 전송받도록
+                   			// request 내장 객체의 getParamenter() 메소드를 작성
+                   			String id = request.getParameter("id");
+                   			String pw = request.getParameter("pw");
+                   			
+                   			// 폼 태그로부터 전송받은 아이디와 비밀번호가 일치하면 response01_success.jsp로 이동
+                   			if(id.equals("admin") && pw.equals("1234")) {
+                   				response.sendRedirect("response01_success.jsp");
+                   			} else { // 일치하지 않으면 response01_failed.jsp로 이동
+                   				response.sendRedirect("response01_failed.jsp");
+                   			}
+                   		%>
                     </div>
                 </div>
             </div>

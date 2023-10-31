@@ -9,7 +9,13 @@
 </head>
 <body>
 <c:forEach begin="0" end="10" step="2" var="num">
-	<c:out value="${num}"></c:out>
+	<c:out value="${num}"/>
+</c:forEach>
+<br/>
+<c:forEach begin="0" end="10" step="1" var="num">
+	<c:if test="${num%2==0}">
+		<c:out value="${num}"/>
+	</c:if>
 </c:forEach>
 </body>
 </html>
