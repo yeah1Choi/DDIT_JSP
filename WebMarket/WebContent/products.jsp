@@ -30,9 +30,7 @@
 					
 			%>
 			<div class="col-md-4">
-				<!--
-				<img src="${pageContext.request.contextPath }/resources/images/" style="width: 100%"/>
-				-->
+				<img src="${pageContext.request.contextPath }/resources/images/<%=product.getFilename() %>" style="width: 100%"/>
 				<h3><%= product.getPname() %></h3>
 				<p><%= product.getDescription() %></p>
 				<p><%= product.getUniPrice()%></p>

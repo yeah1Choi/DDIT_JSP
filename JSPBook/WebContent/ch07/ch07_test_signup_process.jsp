@@ -51,19 +51,12 @@
 							2. 회원가입이 완료되면, ch07_test_signin.jsp로 이동하여 로그인을 진행할 수 있도록 해주세요.
 						 -->
 						 <%
-						 	request.setCharacterEncoding("UTF-8");
-						 	response.setCharacterEncoding("UTF-8");
-						 
-							MemberDAO dao = MemberDAO.getInstance();
-							MemberVO mem = new MemberVO();
-						 
-	                   		mem.setMem_name(request.getParameter("id"));
-	                   		mem.setMem_pw(request.getParameter("pw"));
-	                   		mem.setMem_name(request.getParameter("name"));
-	                   		mem.setMem_sex(request.getParameter("sex"));
-	                   		
 	                   		// 파일 저장
 	                   		String fileUploadPath = "C:\\upload";
+	                   		
+							MemberDAO dao = MemberDAO.getInstance();
+							MemberVO mem = new MemberVO();
+							
 	                   		File file = new File(fileUploadPath);
 	                   		
 	                   		if(!file.exists()){ 
@@ -71,21 +64,48 @@
                    			}
 	                   		
 	                   		DiskFileUpload upload = new DiskFileUpload();
+	                   		
+	                   		upload.setSizeMax(5 * 1024 * 1024); 
+                   			upload.setSizeThreshold(4 * 1024 * 1024);
+                   			upload.setRepositoryPath(fileUploadPath); 
+	                   		
 	                   		upload.setRepositoryPath(fileUploadPath);
 	                   		
 	                   		List items = upload.parseRequest(request);
+	                   		
 	                   		Iterator params = items.iterator();
 	                   		
+                   			int maxSize = 4 * 1024 * 1024;
 	                   		while(params.hasNext()){
                    				FileItem fileItem = (FileItem) params.next();
                    				
-                   				if(!fileItem.isFormField()){ // 파일 데이터일때
-                   					String fileName = fileItem.getName(); 
+                   				if(fileItem.isFormField()){ // 일반 데이터
+                   					String name = fileItem.getFieldName(); 
+                   					String value = fileItem.getString("UTF-8");
+
+									if(name.equals("id")){ mem.setMem_id(value); }
+									if(name.equals("pw")){ mem.setMem_pw(value); }
+									if(name.equals("name")){ mem.setMem_name(value); }
+									if(name.equals("sex")){ mem.setMem_sex(value); }
+                   					
+                   				} else { // 파일 데이터
+                   					String fileFieldName = fileItem.getFieldName(); 
+                   					String fileName = fileItem.getName();
+                   					String contentType = fileItem.getContentType(); 
+                   					long fileSize = fileItem.getSize(); 
+                   					
                    					mem.setFilename(fileName);
+                   					
+                   					File newFile = new File(fileUploadPath + "/" + fileName);
+                   					
+                   					// 최대 크기를 넘어버림(최대사이즈보다 큰 파일이 업로드됨)
+                   					if(maxSize < fileSize){
+                   						out.println("파일 크기를 초과하였습니다!<br/>");
+                   					} else {
+                   						fileItem.write(newFile); // 파일복사
+                   					}
                    				}
                    			}
-	                   		dao.insertMember(mem);
-	                   		
 	                   		response.sendRedirect("ch07_test_signin.jsp");
 						 %>
                     </div>

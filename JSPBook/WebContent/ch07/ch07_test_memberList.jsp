@@ -91,16 +91,12 @@
 							 String pw = mem.getMem_pw();
 							 String nm = mem.getMem_name();
 							 String gd = mem.getMem_sex();
-							 String kgd = "";
-							 if(gd.equals("F")){
-									kgd = "여자";
-		                   		} else {
-		                   			kgd = "남자";
-		                   		}
+							 String kgd = (gd.equals("F")) ? "여자" : "남자";
+							 String filenm = mem.getFilename();
 						 %>
 						 <tr>
 						 	<td>
-						 		<img alt="" src="C:\\upload\<%= %>">
+						 		<img alt="" src="C:\\upload\<%=filenm%>">
 						 	</td>
 						 	<td>
 						 		아이디 : <%=id%> <br>

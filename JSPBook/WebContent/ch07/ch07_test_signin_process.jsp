@@ -82,7 +82,7 @@
                         if (!have) {
 	                    %>
 	                    <h3>존재하지 않는 회원입니다!</h3>
-	                    <p>5초 후 로그인 페이지로 넘어갑니다 ~</p>
+	                    <p>3초 후 로그인 페이지로 넘어갑니다 ~</p>
 	                    <%
 	                            response.setHeader("Refresh", "5; url=ch07_test_signin.jsp");
 	                        }
