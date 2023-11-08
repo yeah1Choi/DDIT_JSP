@@ -22,16 +22,13 @@
     %>
 	<div class="container">	
 		<div class="row">
-			<!--
-			<div class="col-md-3" align="center">	
-				<img src="${pageContext.request.contextPath }/resources/images/" width="60%">
-			</div>
-			-->
-			
 			<%
 				for(int i=0;i<listOfBooks.size();i++){
 	                Book b = listOfBooks.get(i);
 			%>
+			<div class="col-md-3" align="center">	
+				<img src="${pageContext.request.contextPath }/resource/images/<%=b.getFilename()%>" width="60%">
+			</div>
 			<div class="col-md-10">	
 				<h5 ><%="["+b.getCategory()+"] " + b.getName()%></h5>
 				<p style="padding-top: 10px"><%=b.getDescription()%></p> 

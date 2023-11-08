@@ -4,6 +4,7 @@
 <link rel="stylesheet" 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <title>상품 등록</title>
 </head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/validation.js"></script>
 <body>
 	<%@ include file="menu.jsp" %>	
 	<div class="jumbotron">
@@ -72,7 +73,7 @@
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10 ">
-					<input type="submit" class="btn btn-primary" value="등록">
+					<input type="button" class="btn btn-primary" value="등록" onclick="CheckAddProduct()">
 				</div>
 			</div>
 		</form>

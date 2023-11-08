@@ -23,11 +23,9 @@
 	 %>
 	<div class="container">
 		<div class="row">
-			<!--
 			<div class="col-md-4">
-				<img src="${pageContext.request.contextPath }/resources/images/" style="width: 100%" />
+				<img src="${pageContext.request.contextPath }/resource/images/<%=book.getFilename()%>" style="width: 100%" />
 			</div>
-			-->
 			<div class="col-md-12">
 				<h4><b><%="["+book.getCategory()+"] " + book.getName()%></b></h4>
 				<p><%=book.getDescription()%></p>
