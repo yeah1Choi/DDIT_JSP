@@ -9,6 +9,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css">
 </head>
+<script type="text/javascript">
+function addToCart() {
+	if(confirm("상품을 장바구니에 추가하시겠습니까?")){
+		document.addForm.submit();
+	} else {
+		document.addForm.reset();
+	}
+}
+</script>
 <body>
 	<%@ include file="menu.jsp" %>
 	<div class="jumbotron">
@@ -18,8 +27,8 @@
 	</div>
 	<%
 		String id = request.getParameter("id");
-	ProductRepository dao = ProductRepository.getInstance();
-	Product product = dao.getProductById(id);
+		ProductRepository dao = ProductRepository.getInstance();
+		Product product = dao.getProductById(id);
 	%>
 	<div class="container">
 		<div class="row" align="center">
@@ -34,9 +43,9 @@
 				<p><b>분류 : <%=product.getCategory()%> </b></p>
 				<p><b>재고수 : <%=product.getUnitsInStock()%></b></p>
 				<h4><%=product.getUniPrice()%>원</h4>
-				<form action="addCart.jsp?id=" method="post" name="addForm">
+				<form action="addCart.jsp?id=<%= product.getProductId() %>" method="post" name="addForm">
 					<p>
-						<a href="#" class="btn btn-info">상품 주문 &raquo;</a>
+						<a href="#" class="btn btn-info" onclick="addToCart()">상품 주문 &raquo;</a>
 						<a href="cart.jsp" class="btn btn-warning">장바구니 &raquo;</a>
 						<a href="products.jsp" class="btn btn-secondary">상품 목록 &raquo;</a>
 					</p>
